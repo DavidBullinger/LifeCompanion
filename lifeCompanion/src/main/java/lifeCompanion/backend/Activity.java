@@ -6,6 +6,13 @@ public class Activity
 	
 	private String description;
 
+	public Activity(String name, String description)
+	{
+		super();
+		this.name = name;
+		this.description = description;
+	}
+
 	public String getName()
 	{
 		return name;
