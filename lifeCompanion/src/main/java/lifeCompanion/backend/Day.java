@@ -28,7 +28,6 @@ public class Day
 	{
 		Calendar dateToCheck = Calendar.getInstance();
 		dateToCheck.setTime(date);
-		dateToCheck.get(Calendar.MONTH);
 		Calendar thisDate = Calendar.getInstance();
 		thisDate.setTime(this.date);
 		thisDate.get(Calendar.MONTH);

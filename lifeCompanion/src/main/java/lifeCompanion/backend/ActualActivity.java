@@ -1,5 +1,6 @@
 package lifeCompanion.backend;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class ActualActivity
@@ -40,5 +41,11 @@ public class ActualActivity
 		this.usedTimeInHours = timeInHours;
 	}
 	
+	public String toString()
+	{
+		Calendar time = Calendar.getInstance();
+		time.setTime(timeOfActivity);
+		return time.get(Calendar.HOUR) + ":" + time.get(Calendar.MINUTE) + "\r\n" + usedTimeInHours + "h" + "\r\n"+ activity.getName() + "\r\n" + activity.getDescription();
+	}
 
 }
