@@ -13,14 +13,14 @@ import lifeCompanion.backend.ActualActivity;
 
 public class ActivityGroup extends GroupLayout
 {
-	IOverlayingObject mainScreen;
+	IMainScreen mainScreen;
 	JTextField activityInformationField;
 	JButton deleteButton;
 	SequentialGroup sequentialGroup;
 	Container pane;
 	ActualActivity activity;
 
-	public ActivityGroup(Container host, ActualActivity activity, IOverlayingObject mainScreen)
+	public ActivityGroup(Container host, ActualActivity activity, IMainScreen mainScreen)
 	{
 		super(host);
 		pane = host;

@@ -1,5 +1,6 @@
 package lifeCompanion.backend;
 
+import java.util.Date;
 import java.util.List;
 
 public class Controller
@@ -7,11 +8,14 @@ public class Controller
 	ActivityCollection activityCollection;
 	List<ActualActivity> actualActivityList;
 
+	Date currentDate;
+	
 	List<User> userList;
 	User currentUser;
 	
 	public Controller()
 	{
+		currentDate = new Date();
 		activityCollection = new ActivityCollection(); //load existing activity Collection if available
 	}
 	
@@ -88,5 +92,15 @@ public class Controller
 	public void addActualActivity(ActualActivity actualActivity)
 	{
 		actualActivityList.add(actualActivity);
+	}
+	
+	public Date getCurrentDate()
+	{
+		return currentDate;
+	}
+
+	public void setCurrentDate(Date currentDate)
+	{
+		this.currentDate = currentDate;
 	}
 }

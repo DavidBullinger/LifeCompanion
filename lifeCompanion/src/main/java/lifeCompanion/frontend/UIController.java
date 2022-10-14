@@ -13,16 +13,11 @@ public class UIController
 	MainScreen mainScreen;
 	
 	Controller controller;
-	Date currentDate;
 	DayCollection dayCollection;
-	
-	int physicalValue = 7;
-	int mentalValue = 7;
 	
 	public UIController()
 	{
-		dayCollection = new DayCollection();
-		currentDate = new Date();
+		dayCollection = new DayCollection();;
 		controller = new Controller();
 		mainScreen = new MainScreen(this);
 		mainScreen.setVisible(true); 
@@ -41,12 +36,12 @@ public class UIController
 
 	public Date getCurrentDate()
 	{
-		return currentDate;
+		return controller.getCurrentDate();
 	}
 
 	public void setCurrentDate(Date currentDate)
 	{
-		this.currentDate = currentDate;
+		controller.setCurrentDate(currentDate);
 	}
 	
 	public void addActualActivity(ActualActivity actualAcitivity)

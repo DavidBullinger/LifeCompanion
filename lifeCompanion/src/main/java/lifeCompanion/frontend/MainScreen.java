@@ -19,7 +19,7 @@ import javax.swing.JTextField;
 import lifeCompanion.backend.ActualActivity;
 import lifeCompanion.backend.Day;
 
-public class MainScreen extends JFrame implements IOverlayingObject
+public class MainScreen extends JFrame implements IMainScreen
 {
 	UIController uiController;
 	
@@ -176,7 +176,7 @@ public class MainScreen extends JFrame implements IOverlayingObject
 		addGroup.setVerticalGroup(addGroup.createSequentialGroup().addComponent(buttonShowAnalysis));
 	}
 	
-	public void createActivity()
+	private void createActivity()
 	{
 		CreateActivityWizard wizard = new CreateActivityWizard(uiController);
 		wizard.setVisible(true);
@@ -193,7 +193,7 @@ public class MainScreen extends JFrame implements IOverlayingObject
 	
 	public void addActivity(ActualActivity actualActivity)
 	{
-		Day currentDay = uiController.getDayCollection().getDay(uiController.currentDate);
+		Day currentDay = uiController.getDayCollection().getDay(uiController.getCurrentDate());
 		currentDay.addActivity(actualActivity);
 		dayFillInGroupList.add(new ActivityGroup(pane, actualActivity, this));
 	}
@@ -207,7 +207,7 @@ public class MainScreen extends JFrame implements IOverlayingObject
 		refreshPane();
 	}
 	
-	public void updateActivitiesAndScores()
+	private void updateActivitiesAndScores()
 	{
 		for (ActivityGroup activityGroup : dayFillInGroupList)
 		{
