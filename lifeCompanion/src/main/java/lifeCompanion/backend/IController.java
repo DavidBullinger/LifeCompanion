@@ -16,4 +16,6 @@ public interface IController
 	public void removeActivity(String name);
 	
 	public Activity getActivityByName(String name);
+	
+	public DayCollection getDayCollection();
 }

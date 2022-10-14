@@ -17,13 +17,13 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 
 import lifeCompanion.backend.ActualActivity;
-import lifeCompanion.backend.Controller;
 import lifeCompanion.backend.Day;
+import lifeCompanion.backend.IController;
 
 public class MainScreen extends JFrame implements IMainScreen
 {
 	
-	Controller controller;
+	IController controller;
 	
 	Container pane;
 	GroupLayout calendarGroup;
@@ -41,9 +41,9 @@ public class MainScreen extends JFrame implements IMainScreen
 	JButton buttonPhysicalHealth;
 	JButton buttonMentalHealth;
 	
-	public MainScreen()
+	public MainScreen(IController controller)
 	{
-		controller = new Controller();
+		this.controller = controller;
 
 		prepareMainScreen();
 		controller.getDayCollection().addDay(new Day(controller.getCurrentDate(), 7, 7));

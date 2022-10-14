@@ -12,25 +12,25 @@ public class FrontendCreationTest
 	
 	//Tests if the Frontend together with the backend can be created
 	@Test                                               
-    public void testControllerCreation() 
+    public void testMainScreenCreation() 
 	{
-		MainScreen mainScreen = new MainScreen();
+		controller = new Controller();
+		MainScreen mainScreen = new MainScreen(this.controller);
     }
 	
 	@Test
 	public void testAddActivityWizardCreation()
 	{
-		MainScreen mainScreen = new MainScreen();
-		//Da es hier nur um den Test der Erstellung geht wurde hier ein zusätzlicher Controller erstellt
 		controller = new Controller();
+		MainScreen mainScreen = new MainScreen(controller);
 		AddAcitivityWizard addActivityWizard = new AddAcitivityWizard(controller, mainScreen);
 	}
 	
 	@Test
 	public void testCreateActivityWizardCreation()
 	{
-		MainScreen mainScreen = new MainScreen();
 		controller = new Controller();
+		MainScreen mainScreen = new MainScreen(controller);
 		CreateActivityWizard createActivityWizard = new CreateActivityWizard(controller);
 	}
 }
