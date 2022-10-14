@@ -20,6 +20,7 @@ import javax.swing.JTextField;
 
 import lifeCompanion.backend.Activity;
 import lifeCompanion.backend.ActualActivity;
+import lifeCompanion.backend.IController;
 
 public class AddAcitivityWizard extends JFrame
 {
@@ -31,17 +32,17 @@ public class AddAcitivityWizard extends JFrame
 	JTextField descriptionText;
 	JTextField numberOfHoursText;
 	JButton confirmButton;
-	UIController uiController;
+	IController controller;
 	//ActualActivity actualActivity;
-	MainScreen mainScreen;
+	IMainScreen mainScreen;
 
 	List<Activity> activityList;
 	
 
-	public AddAcitivityWizard(UIController uiController)
+	public AddAcitivityWizard(IController controller, IMainScreen mainScreen)
 	{
-		this.uiController = uiController;
-		this.mainScreen = uiController.getMainScreen();
+		this.controller = controller;
+		this.mainScreen = mainScreen;
 		pane = getContentPane();
 		LayoutManager layoutManager = new FlowLayout();
 		pane.setLayout(layoutManager);
@@ -64,7 +65,7 @@ public class AddAcitivityWizard extends JFrame
 		dropDownTime.setPreferredSize(new Dimension(80, 30));
 		dropDownTime.setEditable(true);
 		
-		activityList = uiController.getActivityCollection().getActivityList();
+		activityList = controller.getActivityCollection().getActivityList();
 		String[] activityNames = new String[activityList.size()];
 		for (int i = 0; i < activityList.size(); i++)
 		{
@@ -115,7 +116,7 @@ public class AddAcitivityWizard extends JFrame
 	private void chooseAnotherActivity()
 	{
 		String selectedActivity = (String)dropDownActivityChooser.getSelectedItem();
-        descriptionText.setText(uiController.getActivityCollection().getActivityByName(selectedActivity).getDescription());
+        descriptionText.setText(controller.getActivityCollection().getActivityByName(selectedActivity).getDescription());
 	}
 	private void addActualActivity()
 	{
@@ -132,7 +133,7 @@ public class AddAcitivityWizard extends JFrame
 		}
 		
 		int timeIndex = dropDownTime.getSelectedIndex();
-		Date selectedDate = uiController.getCurrentDate();
+		Date selectedDate = controller.getCurrentDate();
 		selectedDate.setHours(0);
 		selectedDate.setMinutes(0);
 		selectedDate.setSeconds(0);

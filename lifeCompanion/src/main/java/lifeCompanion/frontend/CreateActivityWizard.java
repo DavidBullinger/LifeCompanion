@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import lifeCompanion.backend.Activity;
+import lifeCompanion.backend.IController;
 
 public class CreateActivityWizard extends JFrame
 {
@@ -23,12 +24,12 @@ public class CreateActivityWizard extends JFrame
 	JTextField nameText;
 	JTextField descriptionText;
 	JButton confirmButton;
-	UIController uiController;
+	IController controller;
 	
 	
-	public CreateActivityWizard(UIController uiController)
+	public CreateActivityWizard(IController controller)
 	{
-		this.uiController = uiController;
+		this.controller = controller;
 		pane = getContentPane();
 		LayoutManager layoutManager = new FlowLayout();
 		pane.setLayout(layoutManager);
@@ -65,7 +66,7 @@ public class CreateActivityWizard extends JFrame
 	private void addActivity()
 	{
 		Activity activity = new Activity(nameText.getText(), descriptionText.getText());
-		if(!uiController.createActivity(activity))
+		if(!controller.createActivity(activity))
 		{
 			JOptionPane.showMessageDialog(this, "This acitivty already exists. Please choose another name or close this Wizard to abort the Activity Creation.");
 			return;

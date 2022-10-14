@@ -4,30 +4,33 @@ import org.junit.Test;
 
 import lifeCompanion.frontend.AddAcitivityWizard;
 import lifeCompanion.frontend.CreateActivityWizard;
-import lifeCompanion.frontend.UIController;
+import lifeCompanion.frontend.MainScreen;
 
 public class FrontendCreationTest
 {
-	Controller controller;
+	IController controller;
 	
 	//Tests if the Frontend together with the backend can be created
 	@Test                                               
     public void testControllerCreation() 
 	{
-		UIController uiController = new UIController();
+		MainScreen mainScreen = new MainScreen();
     }
 	
 	@Test
 	public void testAddActivityWizardCreation()
 	{
-		UIController uiController = new UIController();
-		AddAcitivityWizard addActivityWizard = new AddAcitivityWizard(uiController);
+		MainScreen mainScreen = new MainScreen();
+		//Da es hier nur um den Test der Erstellung geht wurde hier ein zusätzlicher Controller erstellt
+		controller = new Controller();
+		AddAcitivityWizard addActivityWizard = new AddAcitivityWizard(controller, mainScreen);
 	}
 	
 	@Test
 	public void testCreateActivityWizardCreation()
 	{
-		UIController uiController = new UIController();
-		CreateActivityWizard createActivityWizard = new CreateActivityWizard(uiController);
+		MainScreen mainScreen = new MainScreen();
+		controller = new Controller();
+		CreateActivityWizard createActivityWizard = new CreateActivityWizard(controller);
 	}
 }

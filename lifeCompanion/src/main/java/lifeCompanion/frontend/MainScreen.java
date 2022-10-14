@@ -17,11 +17,13 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 
 import lifeCompanion.backend.ActualActivity;
+import lifeCompanion.backend.Controller;
 import lifeCompanion.backend.Day;
 
 public class MainScreen extends JFrame implements IMainScreen
 {
-	UIController uiController;
+	
+	Controller controller;
 	
 	Container pane;
 	GroupLayout calendarGroup;
@@ -39,13 +41,13 @@ public class MainScreen extends JFrame implements IMainScreen
 	JButton buttonPhysicalHealth;
 	JButton buttonMentalHealth;
 	
-	public MainScreen(UIController uiController)
+	public MainScreen()
 	{
-		this.uiController = uiController;
+		controller = new Controller();
 
 		prepareMainScreen();
-		
-		uiController.getDayCollection().addDay(new Day(uiController.getCurrentDate(), 7, 7));
+		controller.getDayCollection().addDay(new Day(controller.getCurrentDate(), 7, 7));
+		this.setVisible(true);
 	}
 	
 	private void prepareMainScreen()
@@ -178,13 +180,13 @@ public class MainScreen extends JFrame implements IMainScreen
 	
 	private void createActivity()
 	{
-		CreateActivityWizard wizard = new CreateActivityWizard(uiController);
+		CreateActivityWizard wizard = new CreateActivityWizard(controller);
 		wizard.setVisible(true);
 	}
 	
 	private void addActivityWizard()
 	{
-		AddAcitivityWizard addActivityWizard = new AddAcitivityWizard(uiController);
+		AddAcitivityWizard addActivityWizard = new AddAcitivityWizard(controller, this);
 		addActivityWizard.setVisible(true);
 		//chooser
 		
@@ -193,14 +195,14 @@ public class MainScreen extends JFrame implements IMainScreen
 	
 	public void addActivity(ActualActivity actualActivity)
 	{
-		Day currentDay = uiController.getDayCollection().getDay(uiController.getCurrentDate());
+		Day currentDay = controller.getDayCollection().getDay(controller.getCurrentDate());
 		currentDay.addActivity(actualActivity);
 		dayFillInGroupList.add(new ActivityGroup(pane, actualActivity, this));
 	}
 	
 	public void removeGroupLayout(GroupLayout layoutToDelete, ActualActivity actualActivity)
 	{
-		Day currentDay = uiController.getDayCollection().getDay(uiController.getCurrentDate());
+		Day currentDay = controller.getDayCollection().getDay(controller.getCurrentDate());
 		currentDay.removeActivity(actualActivity);
 		dayFillInGroupList.remove(layoutToDelete);
 		
@@ -216,8 +218,8 @@ public class MainScreen extends JFrame implements IMainScreen
 		
 		dayFillInGroupList = new ArrayList<ActivityGroup>();
 		
-		Date currentDate = uiController.getCurrentDate();
-		Day currentDay = uiController.getDayCollection().getDay(currentDate);
+		Date currentDate = controller.getCurrentDate();
+		Day currentDay = controller.getDayCollection().getDay(currentDate);
 		for (ActualActivity actualActivity : currentDay.getActivities())
 		{
 			dayFillInGroupList.add(new ActivityGroup(pane, actualActivity, this));
@@ -238,7 +240,7 @@ public class MainScreen extends JFrame implements IMainScreen
 	private void setCalendarDateToCurrentDate()
 	{
 		Calendar dateCalendar = Calendar.getInstance();
-		dateCalendar.setTime(uiController.getCurrentDate());
+		dateCalendar.setTime(controller.getCurrentDate());
 		calendarText.setText(dateCalendar.get(Calendar.DAY_OF_MONTH) + "." + (dateCalendar.get(Calendar.MONTH)+1) + "." + dateCalendar.get(Calendar.YEAR));
 	
 	}
@@ -246,20 +248,20 @@ public class MainScreen extends JFrame implements IMainScreen
 	private void setDayOffset(int offset)
 	{
 		Calendar calendar = Calendar.getInstance(); 
-		calendar.setTime(uiController.getCurrentDate()); 
+		calendar.setTime(controller.getCurrentDate()); 
 		calendar.add(Calendar.DATE, offset);
-		uiController.setCurrentDate(calendar.getTime());
-		Day currentDay = uiController.getDayCollection().getDay(uiController.getCurrentDate());
+		controller.setCurrentDate(calendar.getTime());
+		Day currentDay = controller.getDayCollection().getDay(controller.getCurrentDate());
 		if(currentDay == null)
 		{
-			uiController.getDayCollection().addDay(new Day(uiController.getCurrentDate(), 7, 7));
+			controller.getDayCollection().addDay(new Day(controller.getCurrentDate(), 7, 7));
 		}
 		updateScreen();
 	}
 	
 	private void setPhysicalOffset()
 	{
-		Day currentDay = uiController.getDayCollection().getDay(uiController.getCurrentDate());
+		Day currentDay = controller.getDayCollection().getDay(controller.getCurrentDate());
 		int value = currentDay.getPhysicalWellBeing() + 1;
 		if(value > 10)
 		{
@@ -271,7 +273,7 @@ public class MainScreen extends JFrame implements IMainScreen
 	
 	private void setMentalOffset()
 	{
-		Day currentDay = uiController.getDayCollection().getDay(uiController.getCurrentDate());
+		Day currentDay = controller.getDayCollection().getDay(controller.getCurrentDate());
 		int value = currentDay.getHappinessScore() + 1;
 		if(value > 10)
 		{
@@ -283,7 +285,7 @@ public class MainScreen extends JFrame implements IMainScreen
 	
 	private void showAnalysisScreen()
 	{
-		AnalysisScreen analysisScreen = new AnalysisScreen(uiController.getDayCollection(), uiController.getActivityCollection());
+		AnalysisScreen analysisScreen = new AnalysisScreen(controller.getDayCollection(), controller.getActivityCollection());
 		analysisScreen.setVisible(true);
 	}
 	// The Pane contents only tent to disappear when something on it changes, this

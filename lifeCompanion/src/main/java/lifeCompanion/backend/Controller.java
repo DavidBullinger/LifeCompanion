@@ -3,7 +3,7 @@ package lifeCompanion.backend;
 import java.util.Date;
 import java.util.List;
 
-public class Controller
+public class Controller implements IController
 {
 	ActivityCollection activityCollection;
 	List<ActualActivity> actualActivityList;
@@ -13,13 +13,16 @@ public class Controller
 	List<User> userList;
 	User currentUser;
 	
+	DayCollection dayCollection;
+	
 	public Controller()
 	{
+		dayCollection = new DayCollection();
 		currentDate = new Date();
 		activityCollection = new ActivityCollection(); //load existing activity Collection if available
 	}
 	
-	public boolean addActivity(Activity activity)
+	public boolean createActivity(Activity activity)
 	{
 		return activityCollection.addActivity(activity);
 	}
@@ -102,5 +105,10 @@ public class Controller
 	public void setCurrentDate(Date currentDate)
 	{
 		this.currentDate = currentDate;
+	}
+	
+	public DayCollection getDayCollection()
+	{
+		return dayCollection;
 	}
 }
