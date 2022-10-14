@@ -16,16 +16,20 @@ public class ActivityGroup extends GroupLayout
 	IOverlayingObject mainScreen;
 	JTextField activityInformationField;
 	JButton deleteButton;
+	SequentialGroup sequentialGroup;
+	Container pane;
+	ActualActivity activity;
 
 	public ActivityGroup(Container host, ActualActivity activity, IOverlayingObject mainScreen)
 	{
 		super(host);
-		
+		pane = host;
+
 		this.mainScreen = mainScreen;
 		activityInformationField = new JTextField();
-		activityInformationField.setPreferredSize(new Dimension(80, 30));
+		activityInformationField.setPreferredSize(new Dimension(250, 100));
 		activityInformationField.setEditable(false);
-		
+
 		deleteButton = new JButton("X");
 		deleteButton.setPreferredSize(new Dimension(90, 40));
 		deleteButton.addActionListener(new ActionListener()
@@ -33,23 +37,34 @@ public class ActivityGroup extends GroupLayout
 
 			public void actionPerformed(ActionEvent e)
 			{
-				removeActivity();
+				deleteActivity();
 			}
 		});
-		this.setVerticalGroup(this.createSequentialGroup().addComponent(activityInformationField));
-		this.setVerticalGroup(this.createSequentialGroup().addComponent(deleteButton));
-		
-		updateActivity(activity);
+		sequentialGroup = this.createSequentialGroup().addComponent(activityInformationField);
+		sequentialGroup.addComponent(deleteButton);
+		this.setHorizontalGroup(sequentialGroup);
+
+		if (activity != null)
+		{
+			activityInformationField.setText(activity.toString());
+		}
+		this.activity = activity;
 	}
 
-	public void updateActivity(ActualActivity activity)
+	private void deleteActivity()
 	{
-		String textFieldText = activity.toString();
-		activityInformationField.setText(textFieldText);
+		removeActivity();
+		mainScreen.removeGroupLayout(this, activity);
 	}
-
-	private void removeActivity()
+	public void removeActivity()
 	{
-		mainScreen.removeGroupLayout(this);
+		pane.remove(activityInformationField);
+		pane.remove(deleteButton);
+	}
+	
+	public void reviveActivity()
+	{
+		pane.add(activityInformationField);
+		pane.add(deleteButton);
 	}
 }

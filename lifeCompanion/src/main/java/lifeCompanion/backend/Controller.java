@@ -5,6 +5,8 @@ import java.util.List;
 public class Controller
 {
 	ActivityCollection activityCollection;
+	List<ActualActivity> actualActivityList;
+
 	List<User> userList;
 	User currentUser;
 	
@@ -13,14 +15,19 @@ public class Controller
 		activityCollection = new ActivityCollection(); //load existing activity Collection if available
 	}
 	
-	public void addActivity(String name, String description)
+	public boolean addActivity(Activity activity)
 	{
-		activityCollection.addActivity(name, description);
+		return activityCollection.addActivity(activity);
 	}
 	
 	public void removeActivity(String name)
 	{
 		activityCollection.removeActivity(name);
+	}
+	
+	public Activity getActivityByName(String name)
+	{
+		return activityCollection.getActivityByName(name);
 	}
 	
 	private User getUserByName(String username)
@@ -71,5 +78,15 @@ public class Controller
 	public User getCurrentUser()
 	{
 		return currentUser;
+	}
+	
+	public ActivityCollection getActivityCollection()
+	{
+		return activityCollection;
+	}
+	
+	public void addActualActivity(ActualActivity actualActivity)
+	{
+		actualActivityList.add(actualActivity);
 	}
 }

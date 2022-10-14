@@ -15,16 +15,21 @@ public class ActivityCollection
 		activityList = new ArrayList<Activity>();
 	}
 
-	public boolean addActivity(String name, String description)
+	public List<Activity> getActivityList()
 	{
-		for (Activity activity : activityList)
+		return activityList;
+	}
+	
+	public boolean addActivity(Activity activity)
+	{
+		for (Activity activityTemp : activityList)
 		{
-			if(name.equals(activity.getName()))
+			if(activityTemp.getName().equals(activity.getName()))
 			{
 				return false;
 			}
 		}
-		activityList.add(new Activity(name, description));
+		activityList.add(activity);
 		return true;
 	}
 	
@@ -38,5 +43,17 @@ public class ActivityCollection
 			}
 		}
 		return false;
+	}
+	
+	public Activity getActivityByName(String name)
+	{
+		for (Activity activity : activityList)
+		{
+			if(name.equals(activity.getName()))
+			{
+				return activity;
+			}
+		}
+		return null;
 	}
 }

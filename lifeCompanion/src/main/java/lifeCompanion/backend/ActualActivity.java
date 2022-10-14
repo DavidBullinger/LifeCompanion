@@ -10,6 +10,13 @@ public class ActualActivity
 	private Date timeOfActivity;
 	
 	private float usedTimeInHours;
+	
+	public ActualActivity(Activity activity, Date timeOfActivity, float usedTimeInHours)
+	{
+		this.activity = activity;
+		this.timeOfActivity = timeOfActivity;
+		this.usedTimeInHours = usedTimeInHours;
+	}
 
 	public Activity getActivity() 
 	{

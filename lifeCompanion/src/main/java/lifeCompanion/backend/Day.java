@@ -1,5 +1,6 @@
 package lifeCompanion.backend;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -16,10 +17,10 @@ public class Day
 	
 	//private boolean d
 
-	public Day(Date date, List<ActualActivity> activityList, int happinessScore, int physicalWellBeing)
+	public Day(Date date, int happinessScore, int physicalWellBeing)
 	{
+		activityList = new ArrayList<ActualActivity>();
 		this.date = date;
-		this.activityList = activityList;
 		this.happinessScore = happinessScore;
 		this.physicalWellBeing = physicalWellBeing;
 	}
