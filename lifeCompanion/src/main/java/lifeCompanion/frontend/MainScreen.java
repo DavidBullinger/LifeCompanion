@@ -29,13 +29,15 @@ public class MainScreen extends JFrame implements IMainScreen
 	GroupLayout calendarGroup;
 	List<ActivityGroup> dayFillInGroupList;
 	
-	GroupLayout addGroup;
+	GroupLayout activityGroup;
 	JTextField calendarText;
 	JButton buttonDayBefore;
 	JButton buttonDayAfter;
 	JButton buttonAddActivity;
 	JButton buttonCreateActivity;
 	JButton buttonShowAnalysis;
+	JButton buttonShowStatistics;
+	JButton buttonShowSettings;
 	
 	GroupLayout healthGroup;
 	JButton buttonPhysicalHealth;
@@ -53,7 +55,7 @@ public class MainScreen extends JFrame implements IMainScreen
 	private void prepareMainScreen()
 	{
 		setTitle("Life Companion");
-		setSize(800, 500);
+		setSize(1000, 700);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		pane = getContentPane();
@@ -69,13 +71,12 @@ public class MainScreen extends JFrame implements IMainScreen
 	private void prepareCalendarGroup()
 	{
 		calendarGroup = new GroupLayout(pane);
+		
 		calendarText = new JTextField();
 		calendarText.setPreferredSize(new Dimension(80, 30));
 		calendarText.setEditable(false);
 		setCalendarDateToCurrentDate();
-		//calendarGroup.
-		
-		//calendarGroup.setHorizontalGroup(calendarGroup.createSequentialGroup().addComponent(calendarText));
+
 		calendarGroup.setAutoCreateContainerGaps(true);
 		
 		buttonDayBefore = new JButton("<-");
@@ -139,7 +140,19 @@ public class MainScreen extends JFrame implements IMainScreen
 	{
 		dayFillInGroupList = new ArrayList<ActivityGroup>();
 		
-		addGroup = new GroupLayout(pane);
+		activityGroup = new GroupLayout(pane);
+		
+		buttonShowSettings = new JButton("Settings");
+		buttonShowSettings.setPreferredSize(new Dimension(90,40));
+		buttonShowSettings.addActionListener(new ActionListener()
+		{
+			
+			public void actionPerformed(ActionEvent e)
+			{
+				showSettingsScreen();
+			}
+		});
+		
 		buttonAddActivity = new JButton("Add");
 		buttonAddActivity.setPreferredSize(new Dimension(90,40));
 		buttonAddActivity.addActionListener(new ActionListener()
@@ -158,7 +171,7 @@ public class MainScreen extends JFrame implements IMainScreen
 			
 			public void actionPerformed(ActionEvent e)
 			{
-				createActivity();
+				showActivityScreen();
 			}
 		});
 		
@@ -173,12 +186,30 @@ public class MainScreen extends JFrame implements IMainScreen
 			}
 		});
 		
-		addGroup.setVerticalGroup(addGroup.createSequentialGroup().addComponent(buttonAddActivity));
-		addGroup.setVerticalGroup(addGroup.createSequentialGroup().addComponent(buttonCreateActivity));
-		addGroup.setVerticalGroup(addGroup.createSequentialGroup().addComponent(buttonShowAnalysis));
+		buttonShowStatistics = new JButton("Statistics");
+		buttonShowStatistics.setPreferredSize(new Dimension(90,40));
+		buttonShowStatistics.addActionListener(new ActionListener()
+		{
+			
+			public void actionPerformed(ActionEvent e)
+			{
+				showStatisticsScreen();
+			}
+		});
+		
+		activityGroup.setVerticalGroup(activityGroup.createSequentialGroup().addComponent(buttonShowSettings));
+		activityGroup.setVerticalGroup(activityGroup.createSequentialGroup().addComponent(buttonAddActivity));
+		activityGroup.setVerticalGroup(activityGroup.createSequentialGroup().addComponent(buttonCreateActivity));
+		activityGroup.setVerticalGroup(activityGroup.createSequentialGroup().addComponent(buttonShowAnalysis));
+		activityGroup.setVerticalGroup(activityGroup.createSequentialGroup().addComponent(buttonShowStatistics));
 	}
 	
-	private void createActivity()
+	private void showSettingsScreen()
+	{
+		SettingsScreen settingsScreen = new SettingsScreen(controller);
+		settingsScreen.setVisible(rootPaneCheckingEnabled);
+	}
+	private void showActivityScreen()
 	{
 		CreateActivityWizard wizard = new CreateActivityWizard(controller);
 		wizard.setVisible(true);
@@ -188,9 +219,6 @@ public class MainScreen extends JFrame implements IMainScreen
 	{
 		AddAcitivityWizard addActivityWizard = new AddAcitivityWizard(controller, this);
 		addActivityWizard.setVisible(true);
-		//chooser
-		
-		//realoadActivities();
 	}
 	
 	public void addActivity(ActualActivity actualActivity)
@@ -288,6 +316,13 @@ public class MainScreen extends JFrame implements IMainScreen
 		AnalysisScreen analysisScreen = new AnalysisScreen(controller.getDayCollection(), controller.getActivityCollection());
 		analysisScreen.setVisible(true);
 	}
+	
+	private void showStatisticsScreen()
+	{
+		StatisticsScreen statisticsScreen = new StatisticsScreen(controller.getDayCollection(), controller.getActivityCollection(), controller.getCurrentStatisticChoice());
+		statisticsScreen.setVisible(true);
+	}
+	
 	// The Pane contents only tent to disappear when something on it changes, this
 	// is an easy fix
 	private void refreshPane()

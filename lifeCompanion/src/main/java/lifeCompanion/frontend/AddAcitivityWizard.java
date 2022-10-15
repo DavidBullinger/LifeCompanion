@@ -33,7 +33,6 @@ public class AddAcitivityWizard extends JFrame
 	JTextField numberOfHoursText;
 	JButton confirmButton;
 	IController controller;
-	//ActualActivity actualActivity;
 	IMainScreen mainScreen;
 
 	List<Activity> activityList;

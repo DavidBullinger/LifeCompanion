@@ -1,21 +1,15 @@
 package lifeCompanion.frontend;
 
 import java.awt.Container;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.HeadlessException;
 import java.awt.LayoutManager;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
 import lifeCompanion.backend.Activity;
 import lifeCompanion.backend.ActivityCollection;
-import lifeCompanion.backend.ActualActivity;
-import lifeCompanion.backend.Day;
 import lifeCompanion.backend.DayCollection;
 
 public class AnalysisScreen extends JFrame

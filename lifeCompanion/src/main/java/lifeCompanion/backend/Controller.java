@@ -12,8 +12,11 @@ public class Controller implements IController
 	
 	DayCollection dayCollection;
 	
+	IActivityStatistic currentStatisticChoice;
+	
 	public Controller()
 	{
+		currentStatisticChoice = new StatisticByHoursDone();
 		dayCollection = new DayCollection();
 		currentDate = new Date();
 		activityCollection = new ActivityCollection(); //load existing activity Collection if available
@@ -58,4 +61,15 @@ public class Controller implements IController
 	{
 		return dayCollection;
 	}
+
+	public IActivityStatistic getCurrentStatisticChoice()
+	{
+		return currentStatisticChoice;
+	}
+
+	public void setCurrentStatisticChoice(IActivityStatistic currentStatisticChoice)
+	{
+		this.currentStatisticChoice = currentStatisticChoice;
+	}
+	
 }

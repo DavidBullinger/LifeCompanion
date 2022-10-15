@@ -18,4 +18,8 @@ public interface IController
 	public Activity getActivityByName(String name);
 	
 	public DayCollection getDayCollection();
+	
+	public IActivityStatistic getCurrentStatisticChoice();
+
+	public void setCurrentStatisticChoice(IActivityStatistic currentStatisticChoice);
 }
