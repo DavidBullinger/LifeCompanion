@@ -4,15 +4,12 @@ import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.HeadlessException;
 import java.awt.LayoutManager;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
 
-import lifeCompanion.backend.Activity;
 import lifeCompanion.backend.ActivityCollection;
 import lifeCompanion.backend.DayCollection;
 import lifeCompanion.backend.IActivityStatistic;
@@ -29,7 +26,7 @@ public class StatisticsScreen extends JFrame
 	public StatisticsScreen(DayCollection dayCollection, ActivityCollection activityCollection, IActivityStatistic activityStatistic) throws HeadlessException
 	{
 		this.activityStatistic = activityStatistic;
-		setTitle("Analysis Screen");
+		setTitle("Statistic Screen");
 		setSize(800, 500);
 		setLocationRelativeTo(null);
 		pane = getContentPane();
