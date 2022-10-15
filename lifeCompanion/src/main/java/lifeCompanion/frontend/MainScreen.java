@@ -14,6 +14,7 @@ import java.util.List;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import lifeCompanion.backend.ActualActivity;
@@ -217,6 +218,12 @@ public class MainScreen extends JFrame implements IMainScreen
 	
 	private void addActivityWizard()
 	{
+		if (controller.getActivityCollection().getActivityList() == null || controller.getActivityCollection().getActivityList().isEmpty())
+		{
+			JOptionPane.showMessageDialog(this, "Please first create an activity before adding one!");
+			return;
+		}
+		
 		AddAcitivityWizard addActivityWizard = new AddAcitivityWizard(controller, this);
 		addActivityWizard.setVisible(true);
 	}

@@ -109,6 +109,8 @@ public class AddAcitivityWizard extends JFrame
 		layout.setVerticalGroup(layout.createSequentialGroup().addComponent(descriptionText));
 		layout.setVerticalGroup(layout.createSequentialGroup().addComponent(numberOfHoursText));
 		layout.setVerticalGroup(layout.createSequentialGroup().addComponent(confirmButton));
+		
+		chooseAnotherActivity();
 	}
 
 	
